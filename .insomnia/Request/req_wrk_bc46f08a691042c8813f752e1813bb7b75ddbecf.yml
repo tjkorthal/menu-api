@@ -1,0 +1,21 @@
+_id: req_wrk_bc46f08a691042c8813f752e1813bb7b75ddbecf
+type: Request
+parentId: fld_wrk_bc46f08a691042c8813f752e1813bb7bd96159ff
+modified: 1627581873113
+created: 1627581873113
+url: "{{ base_url }}/vendor"
+name: /vendor
+description: ""
+method: POST
+body: {}
+parameters: []
+headers: []
+authentication: {}
+metaSortKey: -1627581873113
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

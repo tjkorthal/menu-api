@@ -1,0 +1,25 @@
+_id: spc_c27929bcf2634818bc4ee7c8608ce375
+type: ApiSpec
+parentId: wrk_bc46f08a691042c8813f752e1813bb7b
+modified: 1627582523426
+created: 1627580255396
+fileName: menu-api.yaml
+contents: |
+  openapi: 3.0.3
+  info:
+    title: Menu API
+    version: 0.0.1
+  servers:
+    - url: http://localhost:3000
+  tags:
+    - name: Vendor
+  paths:
+    /vendor:
+      post:
+        summary: Create a vendor
+        responses:
+          "200":
+            description: OK
+        tags:
+          - Vendor
+contentType: yaml
