@@ -1,0 +1,92 @@
+openapi: 3.0.3
+info:
+  title: Menu API
+  version: 0.0.1
+servers:
+  - url: http://localhost:3000
+tags:
+  - name: Vendor
+paths:
+  /vendor:
+    post:
+      summary: Create a vendor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/vendor"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/vendor"
+      tags:
+        - Vendor
+  /vendor/{id}:
+    get:
+      summary: Find a vendor
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/vendor"
+        "404":
+          description: Vendor not found
+      tags:
+        - Vendor
+    delete:
+      summary: Delete a vendor
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/vendor"
+        "404":
+          description: Vendor not found
+      tags:
+      - Vendor
+    patch:
+      summary: Update a vendor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/vendor"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/vendor"
+        "404":
+          description: Vendor not found
+      tags:
+        - Vendor
+components:
+  schemas:
+    vendor:
+      type: object
+      properties:
+        name:
+          type: string
+        id:
+          type: integer
