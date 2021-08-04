@@ -32,8 +32,8 @@ function find(id) {
   return VENDORS.find(vendor => vendor.id == id)
 }
 
-function update(params) {
-  let vendor = find(params.id)
+function update(id, params) {
+  let vendor = find(id)
   if (vendor === undefined) { return undefined }
 
   vendor.name = params.name

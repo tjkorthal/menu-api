@@ -66,6 +66,12 @@ paths:
       - Vendor
     patch:
       summary: Update a vendor
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
       requestBody:
         content:
           application/json:
@@ -140,6 +146,12 @@ paths:
       - Menu
     patch:
       summary: Update a menu
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
       requestBody:
         content:
           application/json:

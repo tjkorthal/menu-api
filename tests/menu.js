@@ -64,14 +64,14 @@ test('#update returns undefined when a menu does not exist', function(t) {
 
 test('#update returns a menu that exists with new values', function(t) {
   let menu = Menu.create({ name: "Tyler's menu" })
-  let updatedMenu = Menu.update({ name: "Tylo's menu", id: menu.id })
+  let updatedMenu = Menu.update(menu.id, { name: "Tylo's menu" })
   t.deepEqual(updatedMenu, { name: "Tylo's menu", id: menu.id })
   t.end()
 })
 
 test('#update persists changes', function(t) {
   let menu = Menu.create({ name: "Tyler's menu" })
-  Menu.update({ name: "Tylo's menu", id: menu.id })
+  Menu.update(menu.id, { name: "Tylo's menu" })
   t.deepEqual(Menu.find(menu.id), { name: "Tylo's menu", id: menu.id })
   t.end()
 })

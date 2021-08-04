@@ -32,8 +32,8 @@ function find(id) {
   return MENUS.find(menu => menu.id == id)
 }
 
-function update(params) {
-  let menu = find(params.id)
+function update(id, params) {
+  let menu = find(id)
   if (menu === undefined) { return undefined }
 
   menu.name = params.name

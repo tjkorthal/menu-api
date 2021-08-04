@@ -35,7 +35,7 @@ app.delete('/vendor/:id', function(req, res) {
 
 // update a vendor
 app.patch('/vendor/:id', function(req, res) {
-  let vendor = Vendor.update(req.body)
+  let vendor = Vendor.update(req.params.id, req.body)
   if (vendor === undefined) {
     res.status(404).end()
   } else {
@@ -71,7 +71,7 @@ app.delete('/menu/:id', function(req, res) {
 
 // update a menu
 app.patch('/menu/:id', function(req, res) {
-  let menu = Menu.update(req.body)
+  let menu = Menu.update(req.params.id, req.body)
   if (menu === undefined) {
     res.status(404).end()
   } else {

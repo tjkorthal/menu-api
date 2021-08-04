@@ -64,14 +64,14 @@ test('#update returns undefined when a vendor does not exist', function(t) {
 
 test('#update returns a vendor that exists with new values', function(t) {
   let vendor = Vendor.create({ name: 'Tyler' })
-  let updatedVendor = Vendor.update({ name: 'Tylo', id: vendor.id })
+  let updatedVendor = Vendor.update(vendor.id, { name: 'Tylo' })
   t.deepEqual(updatedVendor, { name: 'Tylo', id: vendor.id })
   t.end()
 })
 
 test('#update persists changes', function(t) {
   let vendor = Vendor.create({ name: 'Tyler' })
-  Vendor.update({ name: 'Tylo', id: vendor.id })
+  Vendor.update(vendor.id, { name: 'Tylo' })
   t.deepEqual(Vendor.find(vendor.id), { name: 'Tylo', id: vendor.id })
   t.end()
 })
