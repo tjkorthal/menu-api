@@ -6,6 +6,7 @@ app.use(express.json())
 
 const Vendor = require('./vendor')
 const Menu = require('./menu')
+const MenuItem = require('./menuItem')
 
 // add a vendor
 app.post('/vendor', function(req, res) {
@@ -76,6 +77,45 @@ app.patch('/menu/:id', function(req, res) {
     res.status(404).end()
   } else {
     res.status(200).json(menu)
+  }
+})
+
+// add a menu item
+app.post('/menu/:menuId/item', function(req, res) {
+  let item = MenuItem.create({
+    menuId: req.params.id,
+    ...req.body
+  })
+  res.status(200).json(item)
+})
+
+// find a menu item
+app.get('/menu/:menuId/item/:id', function(req, res) {
+  let item = MenuItem.find(req.params.id)
+  if (item === undefined) {
+    res.status(404).end()
+  } else {
+    res.status(200).json(item)
+  }
+})
+
+// delete a menu item
+app.delete('/menu/:menuId/item/:id', function(req, res) {
+  let item = MenuItem.destroy(req.params.id)
+  if (item === undefined) {
+    res.status(404).end()
+  } else {
+    res.status(200).json(item)
+  }
+})
+
+// update a menu item
+app.patch('/menu/:menuId/item/:id', function(req, res) {
+  let item = MenuItem.update(req.params.id, req.body)
+  if (item === undefined) {
+    res.status(404).end()
+  } else {
+    res.status(200).json(item)
   }
 })
 

@@ -7,6 +7,7 @@ servers:
 tags:
   - name: Vendor
   - name: Menu
+  - name: Menu Item
 paths:
   /vendor:
     post:
@@ -168,6 +169,107 @@ paths:
           description: Menu not found
       tags:
         - Menu
+  /menu/{menuId}/item:
+    post:
+      summary: Create a menu item
+      parameters:
+        - name: menuId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/menuItem"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/menuItem"
+      tags:
+        - Menu Item
+  /menu/{menuId}/item/{id}:
+    get:
+      summary: Find a menu item
+      parameters:
+        - name: menuId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/menuItem"
+        "404":
+          description: Menu item not found
+      tags:
+        - Menu Item
+    delete:
+      summary: Delete a menu item
+      parameters:
+        - name: menuId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/menuItem"
+        "404":
+          description: Menu item not found
+      tags:
+      - Menu Item
+    patch:
+      summary: Update a menu item
+      parameters:
+        - name: menuId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/menuItem"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/menuItem"
+        "404":
+          description: Menu item not found
+      tags:
+        - Menu Item
 components:
   schemas:
     vendor:
@@ -185,4 +287,17 @@ components:
         id:
           type: integer
         vendorId:
+          type: integer
+    menuItem:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+        id:
+          type: integer
+        menuId:
           type: integer
