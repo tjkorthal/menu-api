@@ -6,6 +6,7 @@ servers:
   - url: http://localhost:3000
 tags:
   - name: Vendor
+  - name: Menu
 paths:
   /vendor:
     post:
@@ -81,6 +82,80 @@ paths:
           description: Vendor not found
       tags:
         - Vendor
+  /menu:
+    post:
+      summary: Create a menu
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/menu"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/menu"
+      tags:
+        - Menu
+  /menu/{id}:
+    get:
+      summary: Find a menu
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/menu"
+        "404":
+          description: Menu not found
+      tags:
+        - Menu
+    delete:
+      summary: Delete a menu
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/menu"
+        "404":
+          description: Menu not found
+      tags:
+      - Menu
+    patch:
+      summary: Update a menu
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/menu"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/menu"
+        "404":
+          description: Menu not found
+      tags:
+        - Menu
 components:
   schemas:
     vendor:
@@ -89,4 +164,13 @@ components:
         name:
           type: string
         id:
+          type: integer
+    menu:
+      type: object
+      properties:
+        name:
+          type: string
+        id:
+          type: integer
+        vendorId:
           type: integer
