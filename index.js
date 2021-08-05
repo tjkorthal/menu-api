@@ -10,8 +10,12 @@ const MenuItem = require('./menuItem')
 
 // add a vendor
 app.post('/vendor', function(req, res) {
-  let vendor = Vendor.create({ name: req.body.name })
-  res.status(200).json(vendor)
+  try {
+    let vendor = Vendor.create({ name: req.body.name })
+    res.status(200).json(vendor)
+  } catch (error) {
+    res.status(400).json(error)
+  }
 })
 
 // find a vendor

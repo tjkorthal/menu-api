@@ -277,6 +277,15 @@ components:
       properties:
         name:
           type: string
+        phone:
+          type: string
+          format: phone
+        website:
+          type: string
+          format: website
+        email:
+          type: string
+          format: email
         id:
           type: integer
     menu:

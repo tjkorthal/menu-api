@@ -9,9 +9,48 @@
 const VENDORS = []
 let vendorID = 1;
 
+function validateId(id) {
+  if (id > 0) return
+
+  throw 'ID must be present'
+}
+function validateName(name) {
+  if (typeof name === 'string' && name.length >= 3) return
+
+  throw 'Name must be at least 3 characters long'
+}
+
+function validatePhone(phone) {
+  if (phone && phone.length >= 6) return
+
+  throw 'Phone number is invalid'
+}
+
+function validateWebsite(website) {
+  // website is optional
+  if (!website) return
+  if (typeof website === 'string' && website.endsWith('.com')) return
+
+  throw 'Website is invalid'
+}
+
+function validateEmail(email) {
+  if (typeof email === 'string' && email.includes('@')) return
+
+  throw 'Email is invalid'
+}
+
+function validateVendor(vendor) {
+  validateId(vendor.id)
+  validateName(vendor.name)
+  validatePhone(vendor.phone)
+  validateWebsite(vendor.website)
+  validateEmail(vendor.email)
+}
+
 class Vendor {
   constructor(params) {
-    this.id = params.id
+    this.id = Number.parseInt(params.id)
     this.name = params.name
     this.phone = params.phone
     this.website = params.website
@@ -29,6 +68,7 @@ class Vendor {
         { id: vendorID++ }
       )
     )
+    validateVendor(vendor)
     VENDORS.push(vendor)
     return vendor
   }
