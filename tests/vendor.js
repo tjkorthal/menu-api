@@ -1,5 +1,5 @@
 let test = require('tape')
-const Vendor = require('../vendor')
+const { Vendor } = require('../vendor')
 const validVendorParams = {
   name: 'Test Vendor',
   phone: '555-123-4567',

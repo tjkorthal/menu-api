@@ -4,49 +4,11 @@ const app = express()
 // use JSON parsing middleware
 app.use(express.json())
 
-const Vendor = require('./vendor')
+const vendor = require('./routes/vendor')
 const Menu = require('./menu')
 const MenuItem = require('./menuItem')
 
-// add a vendor
-app.post('/vendor', function(req, res) {
-  try {
-    let vendor = Vendor.create({ name: req.body.name })
-    res.status(200).json(vendor)
-  } catch (error) {
-    res.status(400).json(error)
-  }
-})
-
-// find a vendor
-app.get('/vendor/:id', function(req, res) {
-  let vendor = Vendor.find(req.params.id)
-  if (vendor === undefined) {
-    res.status(404).end()
-  } else {
-    res.status(200).json(vendor)
-  }
-})
-
-// delete a vendor
-app.delete('/vendor/:id', function(req, res) {
-  let vendor = Vendor.destroy(req.params.id)
-  if (vendor === undefined) {
-    res.status(404).end()
-  } else {
-    res.status(200).json(vendor)
-  }
-})
-
-// update a vendor
-app.patch('/vendor/:id', function(req, res) {
-  let vendor = Vendor.update(req.params.id, req.body)
-  if (vendor === undefined) {
-    res.status(404).end()
-  } else {
-    res.status(200).json(vendor)
-  }
-})
+app.use('/vendor', vendor)
 
 // add a menu
 app.post('/menu', function(req, res) {

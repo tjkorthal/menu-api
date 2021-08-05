@@ -9,21 +9,28 @@
 const VENDORS = []
 let vendorID = 1;
 
+class VendorInvalidError extends Error {
+  constructor(...params) {
+    super(...params)
+  }
+}
+
 function validateId(id) {
   if (id > 0) return
 
-  throw 'ID must be present'
+  throw new VendorInvalidError('ID must be present')
 }
+
 function validateName(name) {
   if (typeof name === 'string' && name.length >= 3) return
 
-  throw 'Name must be at least 3 characters long'
+  throw new VendorInvalidError('Name must be at least 3 characters long')
 }
 
 function validatePhone(phone) {
   if (phone && phone.length >= 6) return
 
-  throw 'Phone number is invalid'
+  throw new VendorInvalidError('Phone number is invalid')
 }
 
 function validateWebsite(website) {
@@ -31,13 +38,13 @@ function validateWebsite(website) {
   if (!website) return
   if (typeof website === 'string' && website.endsWith('.com')) return
 
-  throw 'Website is invalid'
+  throw new VendorInvalidError('Website is invalid')
 }
 
 function validateEmail(email) {
   if (typeof email === 'string' && email.includes('@')) return
 
-  throw 'Email is invalid'
+  throw new VendorInvalidError('Email is invalid')
 }
 
 function validateVendor(vendor) {
@@ -95,9 +102,10 @@ class Vendor {
     let vendor = this.find(id)
     if (vendor === undefined) { return undefined }
 
+    validateVendor(Object.assign({}, vendor, params))
     Object.assign(vendor, params)
     return vendor
   }
 }
 
-module.exports = Vendor
+module.exports = { Vendor, VendorInvalidError }
