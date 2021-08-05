@@ -8,7 +8,9 @@ test('#find returns undefined when menu does not exist', function(t) {
 
 test('#find returns menu that exists', function(t) {
   Menu.create({ name: 'Test Menu' })
-  t.deepEqual(Menu.find(1), { name: 'Test Menu', id: 1 })
+  let menu = Menu.find(1)
+  t.equal(menu.name, 'Test Menu')
+  t.equal(menu.id, 1 )
   t.end()
 })
 
@@ -19,7 +21,9 @@ test('#destroy returns undefined when a menu does not exist', function(t) {
 
 test('#destroy returns a menu that exists', function(t) {
   let menu = Menu.create({ name: 'Test Menu' })
-  t.deepEqual(Menu.destroy(menu.id), { name: 'Test Menu', id: menu.id })
+  let destroyedMenu = Menu.destroy(menu.id)
+  t.equal(destroyedMenu.name, 'Test Menu')
+  t.equal(destroyedMenu.id, menu.id)
   t.end()
 })
 
@@ -32,7 +36,7 @@ test('#destroy returns undefined on the second call', function(t) {
 
 test('#create returns the new menu', function(t) {
   let menu = Menu.create({ name: 'Test Menu' })
-  t.equal(typeof menu, 'object')
+  t.assert(menu instanceof Menu)
   t.equal(menu.name, 'Test Menu')
   t.equal(typeof menu.id, 'number')
   t.end()
@@ -65,13 +69,16 @@ test('#update returns undefined when a menu does not exist', function(t) {
 test('#update returns a menu that exists with new values', function(t) {
   let menu = Menu.create({ name: "Tyler's menu" })
   let updatedMenu = Menu.update(menu.id, { name: "Tylo's menu" })
-  t.deepEqual(updatedMenu, { name: "Tylo's menu", id: menu.id })
+  t.equal(updatedMenu.name,"Tylo's menu")
+  t.equal(updatedMenu.id, menu.id)
   t.end()
 })
 
 test('#update persists changes', function(t) {
   let menu = Menu.create({ name: "Tyler's menu" })
   Menu.update(menu.id, { name: "Tylo's menu" })
-  t.deepEqual(Menu.find(menu.id), { name: "Tylo's menu", id: menu.id })
+  let updatedMenu = Menu.find(menu.id)
+  t.equal(updatedMenu.name, "Tylo's menu")
+  t.equal(updatedMenu.id, menu.id)
   t.end()
 })

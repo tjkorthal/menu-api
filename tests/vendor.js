@@ -8,7 +8,9 @@ test('#find returns undefined when vendor does not exist', function(t) {
 
 test('#find returns vendor that exists', function(t) {
   Vendor.create({ name: 'Test Vendor' })
-  t.deepEqual(Vendor.find(1), { name: 'Test Vendor', id: 1 })
+  let vendor = Vendor.find(1)
+  t.assert(vendor instanceof Vendor)
+  t.equal(vendor.name, 'Test Vendor')
   t.end()
 })
 
@@ -19,7 +21,9 @@ test('#destroy returns undefined when a vendor does not exist', function(t) {
 
 test('#destroy returns a vendor that exists', function(t) {
   let vendor = Vendor.create({ name: 'Test Vendor' })
-  t.deepEqual(Vendor.destroy(vendor.id), { name: 'Test Vendor', id: vendor.id })
+  let destroyedVendor = Vendor.destroy(vendor.id)
+  t.equal(destroyedVendor.name, 'Test Vendor')
+  t.equal(destroyedVendor.id, vendor.id )
   t.end()
 })
 
@@ -32,7 +36,7 @@ test('#destroy returns undefined on the second call', function(t) {
 
 test('#create returns the new vendor', function(t) {
   let vendor = Vendor.create({ name: 'Test Vendor' })
-  t.equal(typeof vendor, 'object')
+  t.assert(vendor instanceof Vendor)
   t.equal(vendor.name, 'Test Vendor')
   t.equal(typeof vendor.id, 'number')
   t.end()
@@ -65,13 +69,16 @@ test('#update returns undefined when a vendor does not exist', function(t) {
 test('#update returns a vendor that exists with new values', function(t) {
   let vendor = Vendor.create({ name: 'Tyler' })
   let updatedVendor = Vendor.update(vendor.id, { name: 'Tylo' })
-  t.deepEqual(updatedVendor, { name: 'Tylo', id: vendor.id })
+  t.equal(updatedVendor.name, 'Tylo')
+  t.equal(updatedVendor.id, vendor.id)
   t.end()
 })
 
 test('#update persists changes', function(t) {
   let vendor = Vendor.create({ name: 'Tyler' })
   Vendor.update(vendor.id, { name: 'Tylo' })
-  t.deepEqual(Vendor.find(vendor.id), { name: 'Tylo', id: vendor.id })
+  let updatedVendor = Vendor.find(vendor.id)
+  t.equal(updatedVendor.name, 'Tylo')
+  t.equal(updatedVendor.id, vendor.id )
   t.end()
 })

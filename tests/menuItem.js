@@ -8,7 +8,9 @@ test('#find returns undefined when menuItem does not exist', function(t) {
 
 test('#find returns menuItem that exists', function(t) {
   MenuItem.create({ name: 'Test MenuItem' })
-  t.deepEqual(MenuItem.find(1), { name: 'Test MenuItem', id: 1 })
+  let menuItem = MenuItem.find(1)
+  t.equal(menuItem.name, 'Test MenuItem')
+  t.equal(menuItem.id, 1 )
   t.end()
 })
 
@@ -19,7 +21,9 @@ test('#destroy returns undefined when a menuItem does not exist', function(t) {
 
 test('#destroy returns a menuItem that exists', function(t) {
   let menuItem = MenuItem.create({ name: 'Test MenuItem' })
-  t.deepEqual(MenuItem.destroy(menuItem.id), { name: 'Test MenuItem', id: menuItem.id })
+  let destroyedItem = MenuItem.destroy(menuItem.id)
+  t.deepEqual(destroyedItem.name, 'Test MenuItem')
+  t.deepEqual(destroyedItem.id, menuItem.id)
   t.end()
 })
 
@@ -32,7 +36,7 @@ test('#destroy returns undefined on the second call', function(t) {
 
 test('#create returns the new menuItem', function(t) {
   let menuItem = MenuItem.create({ name: 'Test MenuItem' })
-  t.equal(typeof menuItem, 'object')
+  t.assert(menuItem instanceof MenuItem)
   t.equal(menuItem.name, 'Test MenuItem')
   t.equal(typeof menuItem.id, 'number')
   t.end()
@@ -65,13 +69,16 @@ test('#update returns undefined when a menuItem does not exist', function(t) {
 test('#update returns a menuItem that exists with new values', function(t) {
   let menuItem = MenuItem.create({ name: "Tyler's menuItem" })
   let updatedMenuItem = MenuItem.update(menuItem.id, { name: "Tylo's menuItem" })
-  t.deepEqual(updatedMenuItem, { name: "Tylo's menuItem", id: menuItem.id })
+  t.equal(updatedMenuItem.name, "Tylo's menuItem")
+  t.equal(updatedMenuItem.id, menuItem.id)
   t.end()
 })
 
 test('#update persists changes', function(t) {
   let menuItem = MenuItem.create({ name: "Tyler's menuItem" })
   MenuItem.update(menuItem.id, { name: "Tylo's menuItem" })
-  t.deepEqual(MenuItem.find(menuItem.id), { name: "Tylo's menuItem", id: menuItem.id })
+  let updatedMenuItem = MenuItem.find(menuItem.id)
+  t.equal(updatedMenuItem.name, "Tylo's menuItem")
+  t.equal(updatedMenuItem.id, menuItem.id)
   t.end()
 })
