@@ -9,13 +9,50 @@
 const MENU_ITEMS = []
 let itemID = 1;
 
+class MenuItemInvalidError extends Error {
+  constructor(...params) {
+    super(...params)
+  }
+}
+
+function validateId(id) {
+  if (id > 0) return
+
+  throw new MenuItemInvalidError('ID must be present')
+}
+
+function validateMenuId(id) {
+  if (id > 0) return
+
+  throw new MenuItemInvalidError('ID must be present')
+}
+
+function validateName(name) {
+  if (typeof name === 'string' && name.length >= 3) return
+
+  throw new MenuItemInvalidError('Name must be at least 3 characters long')
+}
+
+function validatePrice(price) {
+  if (price >= 0) return
+
+  throw new MenuItemInvalidError('Price cannot be negative')
+}
+
+function validateMenuItem(vendor) {
+  validateId(vendor.id)
+  validateMenuId(vendor.menuId)
+  validateName(vendor.name)
+  validatePrice(vendor.price)
+}
+
 class MenuItem {
   constructor(params) {
-    this.id = params.id
-    this.menuId = params.menuId
+    this.id = Number.parseInt(params.id)
+    this.menuId = Number.parseInt(params.menuId)
     this.name = params.name
     this.description = params.description
-    this.price = params.price
+    this.price = Number.parseFloat(params.price)
   }
 
   static all() {
@@ -29,6 +66,7 @@ class MenuItem {
         { id: itemID++ }
       )
     )
+    validateMenuItem(item)
     MENU_ITEMS.push(item)
     return item
   }
@@ -55,9 +93,10 @@ class MenuItem {
     let item = this.find(id)
     if (item === undefined) { return undefined }
 
+    validateMenuItem(Object.assign({}, item, params))
     Object.assign(item, params)
     return item
   }
 }
 
-module.exports = MenuItem
+module.exports = { MenuItem, MenuItemInvalidError }
