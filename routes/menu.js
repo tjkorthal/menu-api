@@ -7,7 +7,7 @@ const menuItem = require('./menuItem')
 // add a menu
 router.post('/', function(req, res) {
   let menu = Menu.create(req.body)
-  res.status(200).json(menu)
+  res.status(201).json(menu)
 })
 
 router.route('/:id')

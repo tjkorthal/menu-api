@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const PORT = 3000
 
 // use JSON parsing middleware
 app.use(express.json())
@@ -14,4 +15,6 @@ const menu = require('./routes/menu')
 app.use('/vendor', vendor)
 app.use('/menu', menu)
 
-app.listen(3000)
+app.listen(PORT)
+
+console.log(`Listening on port ${PORT}`)

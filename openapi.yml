@@ -18,8 +18,8 @@ paths:
             schema:
               $ref: "#/components/schemas/vendor"
       responses:
-        "200":
-          description: OK
+        "201":
+          description: Created
           content:
             application/json:
               schema:
@@ -98,8 +98,8 @@ paths:
             schema:
               $ref: "#/components/schemas/menu"
       responses:
-        "200":
-          description: OK
+        "201":
+          description: Created
           content:
             application/json:
               schema:
@@ -184,8 +184,8 @@ paths:
             schema:
               $ref: "#/components/schemas/menuItem"
       responses:
-        "200":
-          description: OK
+        "201":
+          description: Created
           content:
             application/json:
               schema:

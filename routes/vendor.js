@@ -6,7 +6,7 @@ const { Vendor, VendorInvalidError } = require('../vendor')
 // add a vendor
 router.post('/', function(req, res) {
   let vendor = Vendor.create(req.body)
-  res.status(200).json(vendor)
+  res.status(201).json(vendor)
 })
 
 router.route('/:id')
