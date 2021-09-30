@@ -10,6 +10,19 @@ router.post('/', function(req, res) {
   res.status(201).json(menu)
 })
 
+// fetch menus
+router.get('/', function(req, res) {
+  const limit = parseInt(req.query.limit) || 0;
+  const offset = parseInt(req.query.offset) || 0;
+  let menus;
+  if (limit !== 0 || offset !== 0) {
+    menus = Menu.all().slice(offset, offset + limit)
+  } else {
+    menus = Menu.all()
+  }
+  res.status(200).json(menus)
+})
+
 router.route('/:id')
   // find a menu
   .get(function(req, res) {

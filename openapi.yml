@@ -144,6 +144,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/menu"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: string
+                description: error info
+                example: Name must be at least 3 characters long
       tags:
         - Menu
   /menu/{id}:
@@ -205,6 +213,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/menu"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: string
+                description: error info
+                example: Name must be at least 3 characters long
         "404":
           description: Menu not found
       tags:
@@ -335,6 +351,7 @@ components:
       properties:
         name:
           type: string
+          minLength: 3
         id:
           type: integer
         vendorId:
