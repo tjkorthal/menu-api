@@ -24,6 +24,38 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/vendor"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: string
+                description: error info
+                example: Name must be at least 3 characters long
+      tags:
+        - Vendor
+    get:
+      summary: List vendors
+      parameters:
+        - name: offset
+          description: index to start querying list of vendors
+          in: query
+          schema:
+            type: integer
+        - name: limit
+          description: max number of vendors to return
+          in: query
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/vendor"
       tags:
         - Vendor
   /vendor/{id}:
@@ -85,6 +117,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/vendor"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: string
+                description: error info
+                example: Name must be at least 3 characters long
         "404":
           description: Vendor not found
       tags:
@@ -277,9 +317,11 @@ components:
       properties:
         name:
           type: string
+          minLength: 3
         phone:
           type: string
           format: phone
+          minLength: 6
         website:
           type: string
           format: website
