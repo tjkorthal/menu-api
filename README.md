@@ -19,7 +19,5 @@ Integration tests are written in Ruby using the Rspec gem.
 3. Open a new terminal window and run `npm run serve`
 4. Run `bundle exec rspec`
 
-NOTE: Because resource ids are currently hardcoded in the tests you'll need to
-restart your API server between test runs for accurate results.
-
+NOTE: Running the integration tests deletes all resources.
 Endpoints are documented in `openapi.yml`

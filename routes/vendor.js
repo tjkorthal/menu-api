@@ -9,6 +9,19 @@ router.post('/', function(req, res) {
   res.status(201).json(vendor)
 })
 
+// fetch vendors
+router.get('/', function(req, res) {
+  const limit = parseInt(req.query.limit) || 0;
+  const offset = parseInt(req.query.offset) || 0;
+  let vendors;
+  if (limit !== 0 || offset !== 0) {
+    vendors = Vendor.all().slice(offset, offset + limit)
+  } else {
+    vendors = Vendor.all()
+  }
+  res.status(200).json(vendors)
+})
+
 router.route('/:id')
   // find a vendor
   .get(function(req, res) {
